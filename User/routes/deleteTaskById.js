@@ -4,7 +4,7 @@ module.exports = {
     options: {
         handler: require('../handlers/deleteTaskById'),
         tags: ['api'], // ADD THIS TAG
-       //validate: require('../validations/AddEmp')
+       validate: require('../validations/deleteTaskById')
     }  
 };
 

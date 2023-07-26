@@ -4,15 +4,17 @@ try{
 module.exports = async (request, h) => {
     const {
       params,
-      payload, 
       auth: { credentials }
     } = request;
+    let data = {
+      completedByName :"abc",
+      completedById : "gvf",
+      status : "inProgress"
+    }
 
-    const { name: completedByName, levelId: completedById} = credentials;
+    const options = {new: true}
 
-    const taskStatus = await Task.findOneAndUpdate({_id: params._id},
-        { completedByName, completedById }
-      )
+    const taskStatus = await Task.findOneAndUpdate({_id: params._id}, data, options)
       return {
         statusCode: 200,
         message: 'task status',

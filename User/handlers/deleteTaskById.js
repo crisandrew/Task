@@ -3,13 +3,15 @@ const Task = require('../Schema/task')
 
 try{
     module.exports = async (request) => {
-      
-        const DeletedTask = await Task.findByIdAndDelete(request.params._id)
-        //const createUser = await User.find(data)
+        const {
+            params
+        } = request;
+        const DeletedTask = await Task.findOneAndUpdate({_id:params._id}, {archive: true})
+
         return {
             statuscode: 200,
             message: 'Task deleted',
-            data : DeletedTask
+            // data : DeletedTask
         }
         
     };

@@ -1,19 +1,27 @@
-const Boom= require('@hapi/boom');
+const Boom = require('@hapi/boom');
 const Task = require('../Schema/task')
 
-try{
-    module.exports = async (request) => {
-      
-        const editTask = await Task.findByIdAndUpdate(request.params._id);
-      
+
+module.exports = async (request) => {
+    try {
+        const {
+            payload,
+            auth: { credentials },
+            params
+        } = request;
+        
+        const options = { returnDocument: "after", new : true};
+
+        const editTask = await Task.findOneAndUpdate({ _id: params._id }, payload, options);
+
+    
         return {
             statuscode: 200,
             message: 'Task edited',
-            data : editTask
+            data: editTask
         }
-        
-    };
-    }catch{
+    } catch {
         Boom.badRequest('invalid query')
     }
+}
 

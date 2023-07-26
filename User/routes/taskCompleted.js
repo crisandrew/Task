@@ -6,7 +6,7 @@ module.exports = {
     options: {
         handler: require('../handlers/taskCompleted'),
         tags: ['api'], 
-        auth: 'jwt',
+        // auth: 'jwt',
         plugins: {
           hapiAuthorization: { roles: ['support', 'superAdmin'] }
         },

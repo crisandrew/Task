@@ -4,7 +4,11 @@ const Task = require('../Schema/task');
 try{
     module.exports = async (request) => {
 
-        const DisplayTask = await Task.findById(request.params._id)
+        const {
+            params
+        } = request;
+
+        const DisplayTask = await Task.findById({_id:params._id}, {archive: false})
         return {
             statuscode: 200,
             message: 'Requested task',
